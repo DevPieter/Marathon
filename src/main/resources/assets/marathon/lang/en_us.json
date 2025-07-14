@@ -1,0 +1,10 @@
+{
+  "marathon.key.toggle_sprint": "Toggle Sprint",
+  "marathon.key.hybrid_sprint": "Hybrid Sprint",
+  "marathon.key.toggle_sneak": "Toggle Sneak",
+  "marathon.key.hybrid_sneak": "Hybrid Sneak",
+  "marathon.text.sprint": "Sprint",
+  "marathon.text.sneak": "Sneak",
+  "marathon.text.toggled": "Toggled",
+  "marathon.text.untoggled": "Untoggled"
+}

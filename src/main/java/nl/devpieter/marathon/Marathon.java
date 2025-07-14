@@ -5,6 +5,7 @@ import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientLifecycleEvents;
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
 import net.minecraft.client.option.KeyBinding;
 import net.minecraft.client.util.InputUtil;
+import net.minecraft.text.MutableText;
 import net.minecraft.text.Text;
 import nl.devpieter.marathon.mixins.accessors.KeyBindingAccessor;
 import nl.devpieter.marathon.statics.KeyBindings;
@@ -66,13 +67,19 @@ public class Marathon implements ClientModInitializer {
         Settings.SPRINT_TOGGLED.toggle();
         Settings.save(Settings.SPRINT_TOGGLED);
 
-        PlayerUtils.sendMessage(Text.of("Sprint " + (Settings.SPRINT_TOGGLED.getValue() ? "toggled" : "untoggled")), true);
+        MutableText sprintText = Text.translatable("marathon.text.sprint");
+        MutableText statusText = Settings.SPRINT_TOGGLED.getValue() ? Text.translatable("marathon.text.toggled") : Text.translatable("marathon.text.untoggled");
+
+        PlayerUtils.sendMessage(sprintText.append(" ").append(statusText), true);
     }
 
     private void toggleSneak() {
         Settings.SNEAK_TOGGLED.toggle();
         Settings.save(Settings.SNEAK_TOGGLED);
 
-        PlayerUtils.sendMessage(Text.of("Sneak " + (Settings.SNEAK_TOGGLED.getValue() ? "toggled" : "untoggled")), true);
+        MutableText sneakText = Text.translatable("marathon.text.sneak");
+        MutableText statusText = Settings.SNEAK_TOGGLED.getValue() ? Text.translatable("marathon.text.toggled") : Text.translatable("marathon.text.untoggled");
+
+        PlayerUtils.sendMessage(sneakText.append(" ").append(statusText), true);
     }
 }
