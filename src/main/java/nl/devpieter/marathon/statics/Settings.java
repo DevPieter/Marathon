@@ -21,6 +21,16 @@ public class Settings {
             true
     );
 
+    public static final BooleanSetting SHOW_TOGGLE_NOTIFICATION = new BooleanSetting(
+            "marathon.show_toggle_notification",
+            true
+    );
+
+    public static final BooleanSetting SHOW_HUD = new BooleanSetting(
+            "marathon.show_hud",
+            true
+    );
+
     public static final BooleanSetting SPRINT_TOGGLED = new BooleanSetting(
             "marathon.sprint.toggled",
             false
