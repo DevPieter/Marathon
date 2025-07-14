@@ -1,5 +1,6 @@
 package nl.devpieter.marathon.statics;
 
+import nl.devpieter.marathon.Marathon;
 import nl.devpieter.marathon.utils.FileUtils;
 import nl.devpieter.utilize.setting.SettingManager;
 import nl.devpieter.utilize.setting.interfaces.ISetting;
@@ -62,7 +63,10 @@ public class Settings {
     );
 
     public static void load() {
-        if (!FileUtils.tryCreateDirectories(CONFIG_FOLDER)) return;
+        if (!FileUtils.doesFileExist(SETTINGS_FILE)) {
+            Marathon.getInstance().getLogger().info("Settings file does not exist, skipping load.");
+            return;
+        }
 
         SettingManager settingManager = SettingManager.getInstance();
         settingManager.loadSettings(SETTINGS_FILE, List.of(
@@ -83,7 +87,10 @@ public class Settings {
     }
 
     public static void save(ISetting<?> setting) {
-        if (!FileUtils.tryCreateFile(SETTINGS_FILE)) return;
+        if (!FileUtils.tryCreateFile(SETTINGS_FILE)) {
+            Marathon.getInstance().getLogger().info("Could not create settings file.");
+            return;
+        }
 
         SettingManager settingManager = SettingManager.getInstance();
         settingManager.queueSave(SETTINGS_FILE, setting);

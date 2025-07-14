@@ -63,6 +63,10 @@ public class Marathon implements ClientModInitializer {
         return INSTANCE;
     }
 
+    public Logger getLogger() {
+        return logger;
+    }
+
     private void toggleSprint() {
         Settings.SPRINT_TOGGLED.toggle();
         Settings.save(Settings.SPRINT_TOGGLED);
