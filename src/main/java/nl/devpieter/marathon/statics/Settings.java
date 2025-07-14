@@ -65,6 +65,8 @@ public class Settings {
     public static void load() {
         if (!FileUtils.doesFileExist(SETTINGS_FILE)) {
             Marathon.getInstance().getLogger().info("Settings file does not exist, skipping load.");
+
+            checkFirstBoot();
             return;
         }
 
@@ -79,11 +81,8 @@ public class Settings {
                 SNEAK_DOUBLE_CLICK_DELAY
         ));
 
-        WAS_FIRST_BOOT = FIRST_BOOT.getValue();
-        if (WAS_FIRST_BOOT) {
-            FIRST_BOOT.setValue(false);
-            save(FIRST_BOOT);
-        }
+        Marathon.getInstance().getLogger().info("Settings loaded successfully.");
+        checkFirstBoot();
     }
 
     public static void save(ISetting<?> setting) {
@@ -94,5 +93,14 @@ public class Settings {
 
         SettingManager settingManager = SettingManager.getInstance();
         settingManager.queueSave(SETTINGS_FILE, setting);
+    }
+
+    private static void checkFirstBoot() {
+        WAS_FIRST_BOOT = FIRST_BOOT.getValue();
+
+        if (WAS_FIRST_BOOT) {
+            FIRST_BOOT.setValue(false);
+            save(FIRST_BOOT);
+        }
     }
 }
