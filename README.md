@@ -1,7 +1,8 @@
 # Marathon
 
-[//]: # ([![Modrinth]&#40;https://img.shields.io/modrinth/dt/m0IY2Cwx?color=blue&label=Downloads&logo=modrinth&#41;]&#40;https://modrinth.com/mod/marathon&#41;)
+[![Modrinth](https://img.shields.io/modrinth/dt/m0IY2Cwx?color=blue&label=Downloads&logo=modrinth)](https://modrinth.com/mod/marathon)
 ![License](https://img.shields.io/github/license/DevPieter/Marathon?color=blue&label=License&logo=github)
+![Java Version](https://img.shields.io/badge/Java-21-blue?logo=java&logoColor=white)
 
 - [Download](#download)
 - [Description](#description)
