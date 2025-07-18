@@ -17,9 +17,6 @@ public abstract class KeyBindingMixin {
     @Shadow
     public abstract String getTranslationKey();
 
-    @Unique
-    private final Marathon marathon = Marathon.getInstance();
-
     @Inject(at = @At("HEAD"), method = "isPressed", cancellable = true)
     private void isPressed(CallbackInfoReturnable<Boolean> cir) {
         if (this.getTranslationKey().equals("key.sprint")) this.handleSprint(cir);

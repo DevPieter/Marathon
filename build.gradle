@@ -11,11 +11,9 @@ archivesBaseName = archives_base_name
 version = "${mod_version}+${minecraft_version}-${max_minecraft_version}"
 
 repositories {
-    repositories {
-        maven {
-            name "Pietr Space Releases"
-            url "https://maven.pietr.space/releases"
-        }
+    maven {
+        name "Pietr Space Releases"
+        url "https://maven.pietr.space/releases"
     }
 }
 
@@ -26,7 +24,7 @@ dependencies {
 
     modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
 
-    modImplementation "nl.devpieter:utilize:1.0.10+1.21-1.21.1"
+    modImplementation "nl.devpieter:utilize:1.0.11+1.21-1.21.1"
     implementation "nl.devpieter:sees:1.1.0"
 }
 
