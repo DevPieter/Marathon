@@ -3,7 +3,7 @@
   "id": "marathon",
   "version": "${version}",
   "name": "Marathon",
-  "description": "Marathon improves the vanilla toggle sprint mechanic by making it easy to toggle sprinting and sneaking with a single key press.",
+  "description": "Enhances Minecraft's vanilla sprinting and sneaking by allowing you to toggle them persistently with a single key press. No more constant re-toggling or awkward double-taps.",
   "authors": [
     "DevPieter"
   ],
@@ -27,6 +27,6 @@
     "fabricloader": ">=${loader_version}",
     "fabric": "*",
     "minecraft": ">=${minecraft_version} <=${max_minecraft_version}",
-    "utilize": ">=1.1.0"
+    "utilize": ">=1.0.11"
   }
 }
