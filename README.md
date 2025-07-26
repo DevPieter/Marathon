@@ -47,7 +47,7 @@ it streamlines your movement controls.
 
 #### Keybindings can be changed in the `Controls` menu:
 
-<img src="https://raw.githubusercontent.com/DevPieter/Marathon/master/docs/images/1.png?raw=true" width="800" height="275"></img>
+<img src="https://raw.githubusercontent.com/DevPieter/Marathon/master/docs/images/1.png?raw=true" width="800" height="562"></img>
 
 ## Roadmap
 
