@@ -10,6 +10,7 @@ import net.minecraft.text.Text;
 import nl.devpieter.marathon.listeners.KeyBindingListener;
 import nl.devpieter.marathon.mixins.accessors.KeyBindingAccessor;
 import nl.devpieter.marathon.statics.KeyBindings;
+import nl.devpieter.marathon.statics.Options;
 import nl.devpieter.marathon.statics.Settings;
 import nl.devpieter.sees.Sees;
 import nl.devpieter.utilize.utils.minecraft.PlayerUtils;
@@ -26,24 +27,33 @@ public class Marathon implements ClientModInitializer {
     public void onInitializeClient() {
         INSTANCE = this;
         Settings.load();
+
+        Options.init();
         KeyBindings.init();
 
         KeyBindings.HYBRID_SPRINT_KEY.onDoubleClick(this::toggleSprint);
         KeyBindings.HYBRID_SNEAK_KEY.onDoubleClick(this::toggleSneak);
 
         ClientLifecycleEvents.CLIENT_STARTED.register(client -> {
-            if (!Settings.WAS_FIRST_BOOT) return;
-            this.logger.info("First boot detected, hijacking sprint and sneak keys. ;D");
 
-            KeyBinding currentSprintKey = client.options.sprintKey;
-            InputUtil.Key sprintKey = ((KeyBindingAccessor) currentSprintKey).getBoundKey();
-            KeyBindings.HYBRID_SPRINT_KEY.setBoundKey(sprintKey);
-            currentSprintKey.setBoundKey(InputUtil.UNKNOWN_KEY);
+            // Force disable vanilla sprint and sneak toggles.
+            // When these are enabled, the game will crash.
+            client.options.getSprintToggled().setValue(false);
+            client.options.getSneakToggled().setValue(false);
 
-            KeyBinding currentSneakKey = client.options.sneakKey;
-            InputUtil.Key sneakKey = ((KeyBindingAccessor) currentSneakKey).getBoundKey();
-            KeyBindings.HYBRID_SNEAK_KEY.setBoundKey(sneakKey);
-            currentSneakKey.setBoundKey(InputUtil.UNKNOWN_KEY);
+            if (Settings.WAS_FIRST_BOOT) {
+                this.logger.info("First boot detected, hijacking sprint and sneak keys. ;D");
+
+                KeyBinding currentSprintKey = client.options.sprintKey;
+                InputUtil.Key sprintKey = ((KeyBindingAccessor) currentSprintKey).getBoundKey();
+                KeyBindings.HYBRID_SPRINT_KEY.setBoundKey(sprintKey);
+                currentSprintKey.setBoundKey(InputUtil.UNKNOWN_KEY);
+
+                KeyBinding currentSneakKey = client.options.sneakKey;
+                InputUtil.Key sneakKey = ((KeyBindingAccessor) currentSneakKey).getBoundKey();
+                KeyBindings.HYBRID_SNEAK_KEY.setBoundKey(sneakKey);
+                currentSneakKey.setBoundKey(InputUtil.UNKNOWN_KEY);
+            }
 
             // Bit hacky, but it works.
             client.options.write();

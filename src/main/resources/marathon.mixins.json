@@ -6,6 +6,7 @@
   "mixins": [
   ],
   "client": [
+    "ControlsOptionsScreenMixin",
     "accessors.KeyBindingAccessor"
   ],
   "injectors": {
