@@ -7,10 +7,12 @@ import net.minecraft.client.option.KeyBinding;
 import net.minecraft.client.util.InputUtil;
 import net.minecraft.text.MutableText;
 import net.minecraft.text.Text;
+import nl.devpieter.marathon.listeners.KeyBindingListener;
 import nl.devpieter.marathon.mixins.accessors.KeyBindingAccessor;
 import nl.devpieter.marathon.statics.KeyBindings;
 import nl.devpieter.marathon.statics.Settings;
-import nl.devpieter.utilize.utils.PlayerUtils;
+import nl.devpieter.sees.Sees;
+import nl.devpieter.utilize.utils.minecraft.PlayerUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -57,6 +59,9 @@ public class Marathon implements ClientModInitializer {
             if (KeyBindings.TOGGLE_SPRINT_KEY.wasPressed()) this.toggleSprint();
             if (KeyBindings.TOGGLE_SNEAK_KEY.wasPressed()) this.toggleSneak();
         });
+
+        Sees sees = Sees.getInstance();
+        sees.subscribe(new KeyBindingListener());
     }
 
     public static Marathon getInstance() {

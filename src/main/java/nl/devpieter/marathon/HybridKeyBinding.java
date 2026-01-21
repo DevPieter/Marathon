@@ -15,7 +15,7 @@ public class HybridKeyBinding {
     private Runnable onDoubleClick = () -> {
     };
 
-    public HybridKeyBinding(String translationKey, InputUtil.Type type, int code, String category, long doubleClickThreshold) {
+    public HybridKeyBinding(String translationKey, InputUtil.Type type, int code, KeyBinding.Category category, long doubleClickThreshold) {
         this.doubleClickThreshold = doubleClickThreshold;
         this.keyBinding = new KeyBinding(translationKey, type, code, category);
     }
