@@ -7,18 +7,16 @@ plugins {
 def targetJavaVersion = 21
 
 group = maven_group
-//archivesBaseName = archives_base_name
 version = "${mod_version}+${minecraft_version}-${max_minecraft_version}"
+
+base {
+    archivesName = archives_base_name
+}
 
 repositories {
     maven {
         name "Pietr Space Releases"
         url "https://maven.pietr.space/releases"
-    }
-
-    maven {
-        name "Pietr Space Snapshots"
-        url "https://maven.pietr.space/snapshots"
     }
 }
 
@@ -29,10 +27,8 @@ dependencies {
 
     modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
 
-//    modImplementation "nl.devpieter:utilize:1.0.11+1.21-1.21.1"
-
-    implementation "nl.devpieter:sees:1.2.0-dd2c322-SNAPSHOT"
-    modImplementation "nl.devpieter:utilize:1.1.0+1.21.9-1.21.11-SNAPSHOT+25"
+    implementation "nl.devpieter:sees:1.2.1"
+    modImplementation "nl.devpieter:utilize:1.1.1+1.21.9-1.21.11"
 }
 
 preprocess {
@@ -56,8 +52,7 @@ processResources {
 }
 
 tasks.withType(JavaCompile).configureEach {
-    it.options.encoding = "UTF-8"
-    it.options.release.set(targetJavaVersion)
+    options.encoding = "UTF-8"
 }
 
 java {
@@ -66,7 +61,7 @@ java {
 
 jar {
     from("LICENSE") {
-        rename { "${it}_${project.archivesBaseName}" }
+        rename { "${it}_${base.archivesName.get()}" }
     }
 }
 

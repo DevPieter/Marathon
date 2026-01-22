@@ -70,7 +70,7 @@ public class Marathon implements ClientModInitializer {
             if (KeyBindings.TOGGLE_SNEAK_KEY.wasPressed()) this.toggleSneak();
         });
 
-        Sees sees = Sees.getInstance();
+        Sees sees = Sees.getSharedInstance();
         sees.subscribe(new KeyBindingListener());
     }
 
