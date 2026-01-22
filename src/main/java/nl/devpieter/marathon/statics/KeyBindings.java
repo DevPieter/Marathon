@@ -12,14 +12,14 @@ public class KeyBindings {
             "marathon.key.toggle_sprint",
             InputUtil.Type.KEYSYM,
             GLFW.GLFW_KEY_LEFT_BRACKET,
-            KeyBinding.MOVEMENT_CATEGORY
+            KeyBinding.Category.MOVEMENT
     );
 
     public static final HybridKeyBinding HYBRID_SPRINT_KEY = new HybridKeyBinding(
             "marathon.key.hybrid_sprint",
             InputUtil.Type.KEYSYM,
             GLFW.GLFW_KEY_LEFT_CONTROL,
-            KeyBinding.MOVEMENT_CATEGORY,
+            KeyBinding.Category.MOVEMENT,
             Settings.SPRINT_DOUBLE_CLICK_DELAY.getValue()
     );
 
@@ -27,14 +27,14 @@ public class KeyBindings {
             "marathon.key.toggle_sneak",
             InputUtil.Type.KEYSYM,
             GLFW.GLFW_KEY_RIGHT_BRACKET,
-            KeyBinding.MOVEMENT_CATEGORY
+            KeyBinding.Category.MOVEMENT
     );
 
     public static final HybridKeyBinding HYBRID_SNEAK_KEY = new HybridKeyBinding(
             "marathon.key.hybrid_sneak",
             InputUtil.Type.KEYSYM,
             GLFW.GLFW_KEY_LEFT_SHIFT,
-            KeyBinding.MOVEMENT_CATEGORY,
+            KeyBinding.Category.MOVEMENT,
             Settings.SNEAK_DOUBLE_CLICK_DELAY.getValue()
     );
 
