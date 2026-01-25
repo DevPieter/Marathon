@@ -23,6 +23,8 @@ public class Marathon implements ClientModInitializer {
 
     private final Logger logger = LoggerFactory.getLogger("Marathon");
 
+    private boolean initialized = false;
+
     @Override
     public void onInitializeClient() {
         INSTANCE = this;
@@ -58,6 +60,8 @@ public class Marathon implements ClientModInitializer {
             // Bit hacky, but it works.
             client.options.write();
             client.options.load();
+
+            this.initialized = true;
         });
 
         ClientTickEvents.START_CLIENT_TICK.register(client -> {
@@ -80,6 +84,10 @@ public class Marathon implements ClientModInitializer {
 
     public Logger getLogger() {
         return logger;
+    }
+
+    public boolean isInitialized() {
+        return initialized;
     }
 
     private void toggleSprint() {
