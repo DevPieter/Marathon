@@ -20,7 +20,7 @@ public class KeyBindingListener implements SListener {
     }
 
     private @NotNull KeyActionOverride handleSprint() {
-        KeyActionOverride override = KeyActionOverride.FORCE_RELEASE;
+        KeyActionOverride override = KeyActionOverride.NONE;
 
         boolean holding = KeyBindings.HYBRID_SPRINT_KEY.isPressed();
         if (holding) override = KeyActionOverride.FORCE_PRESS;
@@ -37,7 +37,7 @@ public class KeyBindingListener implements SListener {
     }
 
     private @NotNull KeyActionOverride handleSneak() {
-        KeyActionOverride override = KeyActionOverride.FORCE_RELEASE;
+        KeyActionOverride override = KeyActionOverride.NONE;
 
         boolean holding = KeyBindings.HYBRID_SNEAK_KEY.isPressed();
         if (holding) override = KeyActionOverride.FORCE_PRESS;
