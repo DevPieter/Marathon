@@ -28,7 +28,7 @@ dependencies {
     modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
 
     implementation "nl.devpieter:sees:1.2.1"
-    modImplementation "nl.devpieter:utilize:1.1.1+1.21.9-1.21.11"
+    modImplementation "nl.devpieter:utilize:1.1.2+1.21.9-1.21.11"
 }
 
 preprocess {

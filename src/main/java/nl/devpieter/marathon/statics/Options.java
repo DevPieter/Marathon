@@ -6,7 +6,7 @@ import net.minecraft.text.Text;
 public class Options {
 
     public static final SimpleOption<Boolean> SPRINT_TOGGLED_DECOY_OPTION = new SimpleOption<>(
-            "key.sneak",
+            "key.sprint",
             SimpleOption.constantTooltip(Text.of("Marathon hijacks this option to provide toggle sprint functionality.")),
             (optionText, value) -> Text.of("Marathon"),
             SimpleOption.BOOLEAN,
