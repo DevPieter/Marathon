@@ -4,5 +4,8 @@ plugins {
 }
 
 preprocess {
+    def mc262 = createNode('26.2', 262, null)
     def mc261 = createNode('26.1', 261, null)
+
+    mc262.link(mc261, null)
 }
