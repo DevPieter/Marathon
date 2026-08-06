@@ -5,8 +5,8 @@ import nl.devpieter.marathon.statics.KeyBindings;
 import nl.devpieter.marathon.statics.Settings;
 import nl.devpieter.sees.annotations.SEventListener;
 import nl.devpieter.sees.listener.SListener;
-import nl.devpieter.utilize.enums.KeyActionOverride;
-import nl.devpieter.utilize.events.interaction.keybinding.KeyBindingPressedCheckEvent;
+import nl.devpieter.utilize.client.enums.KeyActionOverride;
+import nl.devpieter.utilize.client.events.interaction.keybinding.KeyBindingPressedCheckEvent;
 import org.jetbrains.annotations.NotNull;
 
 public class KeyBindingListener implements SListener {
@@ -22,7 +22,7 @@ public class KeyBindingListener implements SListener {
     private @NotNull KeyActionOverride handleSprint() {
         KeyActionOverride override = KeyActionOverride.NONE;
 
-        boolean holding = KeyBindings.HYBRID_SPRINT_KEY.isPressed();
+        boolean holding = KeyBindings.HYBRID_SPRINT_KEY.isDown();
         if (holding) override = KeyActionOverride.FORCE_PRESS;
 
         boolean toggled = Settings.SPRINT_TOGGLED.getValue();
@@ -39,7 +39,7 @@ public class KeyBindingListener implements SListener {
     private @NotNull KeyActionOverride handleSneak() {
         KeyActionOverride override = KeyActionOverride.NONE;
 
-        boolean holding = KeyBindings.HYBRID_SNEAK_KEY.isPressed();
+        boolean holding = KeyBindings.HYBRID_SNEAK_KEY.isDown();
         if (holding) override = KeyActionOverride.FORCE_PRESS;
 
         boolean toggled = Settings.SNEAK_TOGGLED.getValue();

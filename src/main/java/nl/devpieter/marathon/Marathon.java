@@ -1,19 +1,19 @@
 package nl.devpieter.marathon;
 
+import com.mojang.blaze3d.platform.InputConstants;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientLifecycleEvents;
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
-import net.minecraft.client.option.KeyBinding;
-import net.minecraft.client.util.InputUtil;
-import net.minecraft.text.MutableText;
-import net.minecraft.text.Text;
+import net.minecraft.client.KeyMapping;
+import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.MutableComponent;
 import nl.devpieter.marathon.listeners.KeyBindingListener;
 import nl.devpieter.marathon.mixins.accessors.KeyBindingAccessor;
 import nl.devpieter.marathon.statics.KeyBindings;
-import nl.devpieter.marathon.statics.Options;
+import nl.devpieter.marathon.statics.MarathonOptions;
 import nl.devpieter.marathon.statics.Settings;
 import nl.devpieter.sees.Sees;
-import nl.devpieter.utilize.utils.minecraft.PlayerUtils;
+import nl.devpieter.utilize.client.utils.PlayerUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -30,7 +30,7 @@ public class Marathon implements ClientModInitializer {
         INSTANCE = this;
         Settings.load();
 
-        Options.init();
+        MarathonOptions.init();
         KeyBindings.init();
 
         KeyBindings.HYBRID_SPRINT_KEY.onDoubleClick(this::toggleSprint);
@@ -40,25 +40,25 @@ public class Marathon implements ClientModInitializer {
 
             // Force disable vanilla sprint and sneak toggles.
             // When these are enabled, the game will crash.
-            client.options.getSprintToggled().setValue(false);
-            client.options.getSneakToggled().setValue(false);
+            client.options.toggleSprint().set(false);
+            client.options.toggleCrouch().set(false);
 
             if (Settings.WAS_FIRST_BOOT) {
                 this.logger.info("First boot detected, hijacking sprint and sneak keys. ;D");
 
-                KeyBinding currentSprintKey = client.options.sprintKey;
-                InputUtil.Key sprintKey = ((KeyBindingAccessor) currentSprintKey).getBoundKey();
-                KeyBindings.HYBRID_SPRINT_KEY.setBoundKey(sprintKey);
-                currentSprintKey.setBoundKey(InputUtil.UNKNOWN_KEY);
+                KeyMapping currentSprintKey = client.options.keySprint;
+                InputConstants.Key sprintKey = ((KeyBindingAccessor) currentSprintKey).marathon$getKey();
+                KeyBindings.HYBRID_SPRINT_KEY.setKey(sprintKey);
+                currentSprintKey.setKey(InputConstants.UNKNOWN);
 
-                KeyBinding currentSneakKey = client.options.sneakKey;
-                InputUtil.Key sneakKey = ((KeyBindingAccessor) currentSneakKey).getBoundKey();
-                KeyBindings.HYBRID_SNEAK_KEY.setBoundKey(sneakKey);
-                currentSneakKey.setBoundKey(InputUtil.UNKNOWN_KEY);
+                KeyMapping currentSneakKey = client.options.keyShift;
+                InputConstants.Key sneakKey = ((KeyBindingAccessor) currentSneakKey).marathon$getKey();
+                KeyBindings.HYBRID_SNEAK_KEY.setKey(sneakKey);
+                currentSneakKey.setKey(InputConstants.UNKNOWN);
             }
 
-            // Bit hacky, but it works.
-            client.options.write();
+            // A bit hacky, but it works.
+            client.options.save();
             client.options.load();
 
             this.initialized = true;
@@ -70,8 +70,8 @@ public class Marathon implements ClientModInitializer {
         });
 
         ClientTickEvents.END_CLIENT_TICK.register(client -> {
-            if (KeyBindings.TOGGLE_SPRINT_KEY.wasPressed()) this.toggleSprint();
-            if (KeyBindings.TOGGLE_SNEAK_KEY.wasPressed()) this.toggleSneak();
+            if (KeyBindings.TOGGLE_SPRINT_KEY.consumeClick()) this.toggleSprint();
+            if (KeyBindings.TOGGLE_SNEAK_KEY.consumeClick()) this.toggleSneak();
         });
 
         Sees sees = Sees.getSharedInstance();
@@ -94,19 +94,19 @@ public class Marathon implements ClientModInitializer {
         Settings.SPRINT_TOGGLED.toggle();
         Settings.save(Settings.SPRINT_TOGGLED);
 
-        MutableText sprintText = Text.translatable("marathon.text.sprint");
-        MutableText statusText = Settings.SPRINT_TOGGLED.getValue() ? Text.translatable("marathon.text.toggled") : Text.translatable("marathon.text.untoggled");
+        MutableComponent sprintText = Component.translatable("marathon.text.sprint");
+        MutableComponent statusText = Settings.SPRINT_TOGGLED.getValue() ? Component.translatable("marathon.text.toggled") : Component.translatable("marathon.text.untoggled");
 
-        PlayerUtils.sendMessage(sprintText.append(" ").append(statusText), true);
+        PlayerUtils.sendOverlayMessage(sprintText.append(" ").append(statusText));
     }
 
     private void toggleSneak() {
         Settings.SNEAK_TOGGLED.toggle();
         Settings.save(Settings.SNEAK_TOGGLED);
 
-        MutableText sneakText = Text.translatable("marathon.text.sneak");
-        MutableText statusText = Settings.SNEAK_TOGGLED.getValue() ? Text.translatable("marathon.text.toggled") : Text.translatable("marathon.text.untoggled");
+        MutableComponent sneakText = Component.translatable("marathon.text.sneak");
+        MutableComponent statusText = Settings.SNEAK_TOGGLED.getValue() ? Component.translatable("marathon.text.toggled") : Component.translatable("marathon.text.untoggled");
 
-        PlayerUtils.sendMessage(sneakText.append(" ").append(statusText), true);
+        PlayerUtils.sendOverlayMessage(sneakText.append(" ").append(statusText));
     }
 }

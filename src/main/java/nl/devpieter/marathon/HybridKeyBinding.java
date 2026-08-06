@@ -1,11 +1,11 @@
 package nl.devpieter.marathon;
 
-import net.minecraft.client.option.KeyBinding;
-import net.minecraft.client.util.InputUtil;
+import com.mojang.blaze3d.platform.InputConstants;
+import net.minecraft.client.KeyMapping;
 
 public class HybridKeyBinding {
 
-    private final KeyBinding keyBinding;
+    private final KeyMapping keyBinding;
 
     private long doubleClickThreshold;
 
@@ -15,13 +15,13 @@ public class HybridKeyBinding {
     private Runnable onDoubleClick = () -> {
     };
 
-    public HybridKeyBinding(String translationKey, InputUtil.Type type, int code, KeyBinding.Category category, long doubleClickThreshold) {
+    public HybridKeyBinding(String translationKey, InputConstants.Type type, int code, KeyMapping.Category category, long doubleClickThreshold) {
         this.doubleClickThreshold = doubleClickThreshold;
-        this.keyBinding = new KeyBinding(translationKey, type, code, category);
+        this.keyBinding = new KeyMapping(translationKey, type, code, category);
     }
 
     public void tick() {
-        boolean isPressed = this.keyBinding.isPressed();
+        boolean isPressed = this.keyBinding.isDown();
         long currentTime = System.currentTimeMillis();
 
         if (isPressed) {
@@ -47,7 +47,7 @@ public class HybridKeyBinding {
         this.doubleClickThreshold = doubleClickThreshold;
     }
 
-    public KeyBinding keyBinding() {
+    public KeyMapping keyBinding() {
         return this.keyBinding;
     }
 
@@ -59,15 +59,15 @@ public class HybridKeyBinding {
         return this.lastPressTime;
     }
 
-    public boolean isPressed() {
-        return this.keyBinding.isPressed();
+    public boolean isDown() {
+        return this.keyBinding.isDown();
     }
 
-    public boolean wasPressed() {
-        return this.keyBinding.wasPressed();
+    public boolean consumeClick() {
+        return this.keyBinding.consumeClick();
     }
 
-    public void setBoundKey(InputUtil.Key key) {
-        this.keyBinding.setBoundKey(key);
+    public void setKey(InputConstants.Key key) {
+        this.keyBinding.setKey(key);
     }
 }

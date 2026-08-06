@@ -1,47 +1,47 @@
 package nl.devpieter.marathon.statics;
 
-import net.fabricmc.fabric.api.client.keybinding.v1.KeyBindingHelper;
-import net.minecraft.client.option.KeyBinding;
-import net.minecraft.client.util.InputUtil;
+import com.mojang.blaze3d.platform.InputConstants;
+import net.fabricmc.fabric.api.client.keymapping.v1.KeyMappingHelper;
+import net.minecraft.client.KeyMapping;
 import nl.devpieter.marathon.HybridKeyBinding;
 import org.lwjgl.glfw.GLFW;
 
 public class KeyBindings {
 
-    public static final KeyBinding TOGGLE_SPRINT_KEY = new KeyBinding(
+    public static final KeyMapping TOGGLE_SPRINT_KEY = new KeyMapping(
             "marathon.key.toggle_sprint",
-            InputUtil.Type.KEYSYM,
+            InputConstants.Type.KEYSYM,
             GLFW.GLFW_KEY_LEFT_BRACKET,
-            KeyBinding.Category.MOVEMENT
+            KeyMapping.Category.MOVEMENT
     );
 
     public static final HybridKeyBinding HYBRID_SPRINT_KEY = new HybridKeyBinding(
             "marathon.key.hybrid_sprint",
-            InputUtil.Type.KEYSYM,
+            InputConstants.Type.KEYSYM,
             GLFW.GLFW_KEY_LEFT_CONTROL,
-            KeyBinding.Category.MOVEMENT,
+            KeyMapping.Category.MOVEMENT,
             Settings.SPRINT_DOUBLE_CLICK_DELAY.getValue()
     );
 
-    public static final KeyBinding TOGGLE_SNEAK_KEY = new KeyBinding(
+    public static final KeyMapping TOGGLE_SNEAK_KEY = new KeyMapping(
             "marathon.key.toggle_sneak",
-            InputUtil.Type.KEYSYM,
+            InputConstants.Type.KEYSYM,
             GLFW.GLFW_KEY_RIGHT_BRACKET,
-            KeyBinding.Category.MOVEMENT
+            KeyMapping.Category.MOVEMENT
     );
 
     public static final HybridKeyBinding HYBRID_SNEAK_KEY = new HybridKeyBinding(
             "marathon.key.hybrid_sneak",
-            InputUtil.Type.KEYSYM,
+            InputConstants.Type.KEYSYM,
             GLFW.GLFW_KEY_LEFT_SHIFT,
-            KeyBinding.Category.MOVEMENT,
+            KeyMapping.Category.MOVEMENT,
             Settings.SNEAK_DOUBLE_CLICK_DELAY.getValue()
     );
 
     public static void init() {
-        KeyBindingHelper.registerKeyBinding(TOGGLE_SPRINT_KEY);
-        KeyBindingHelper.registerKeyBinding(HYBRID_SPRINT_KEY.keyBinding());
-        KeyBindingHelper.registerKeyBinding(TOGGLE_SNEAK_KEY);
-        KeyBindingHelper.registerKeyBinding(HYBRID_SNEAK_KEY.keyBinding());
+        KeyMappingHelper.registerKeyMapping(TOGGLE_SPRINT_KEY);
+        KeyMappingHelper.registerKeyMapping(HYBRID_SPRINT_KEY.keyBinding());
+        KeyMappingHelper.registerKeyMapping(TOGGLE_SNEAK_KEY);
+        KeyMappingHelper.registerKeyMapping(HYBRID_SNEAK_KEY.keyBinding());
     }
 }
