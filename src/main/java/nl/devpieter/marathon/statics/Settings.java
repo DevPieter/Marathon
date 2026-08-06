@@ -5,7 +5,7 @@ import nl.devpieter.utilize.client.setting.SettingManager;
 import nl.devpieter.utilize.client.setting.interfaces.ISetting;
 import nl.devpieter.utilize.client.setting.settings.BooleanSetting;
 import nl.devpieter.utilize.client.setting.settings.IntSetting;
-import nl.devpieter.utilize.utils.common.FileUtils;
+import nl.devpieter.utilize.utils.FileUtils;
 
 import java.io.File;
 import java.util.List;
