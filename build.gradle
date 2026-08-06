@@ -27,10 +27,6 @@ repositories {
         name "Pietr Space Releases"
         url "https://maven.pietr.space/releases"
     }
-    maven {
-        name = "pietrSpaceSnapshots"
-        url = uri("https://maven.pietr.space/snapshots")
-    }
 }
 
 dependencies {
@@ -40,8 +36,7 @@ dependencies {
     implementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
 
     implementation "nl.devpieter:sees:1.2.1"
-    // modImplementation "nl.devpieter:utilize:1.1.2+1.21.9-1.21.11"
-    implementation "nl.devpieter:utilize:2.0.0+26.1-26.2-SNAPSHOT+32"
+    implementation "nl.devpieter:utilize:2.0.0+26.1-26.2"
 }
 
 preprocess {

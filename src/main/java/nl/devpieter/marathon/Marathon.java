@@ -5,12 +5,15 @@ import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientLifecycleEvents;
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
 import net.minecraft.client.KeyMapping;
+import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.MutableComponent;
 import nl.devpieter.marathon.listeners.KeyBindingListener;
 import nl.devpieter.marathon.mixins.accessors.KeyBindingAccessor;
 import nl.devpieter.marathon.statics.KeyBindings;
 import nl.devpieter.marathon.statics.MarathonOptions;
 import nl.devpieter.marathon.statics.Settings;
 import nl.devpieter.sees.Sees;
+import nl.devpieter.utilize.client.utils.PlayerUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -91,19 +94,19 @@ public class Marathon implements ClientModInitializer {
         Settings.SPRINT_TOGGLED.toggle();
         Settings.save(Settings.SPRINT_TOGGLED);
 
-//        MutableText sprintText = Text.translatable("marathon.text.sprint");
-//        MutableText statusText = Settings.SPRINT_TOGGLED.getValue() ? Text.translatable("marathon.text.toggled") : Text.translatable("marathon.text.untoggled");
-//
-//        PlayerUtils.sendMessage(sprintText.append(" ").append(statusText), true);
+        MutableComponent sprintText = Component.translatable("marathon.text.sprint");
+        MutableComponent statusText = Settings.SPRINT_TOGGLED.getValue() ? Component.translatable("marathon.text.toggled") : Component.translatable("marathon.text.untoggled");
+
+        PlayerUtils.sendOverlayMessage(sprintText.append(" ").append(statusText));
     }
 
     private void toggleSneak() {
         Settings.SNEAK_TOGGLED.toggle();
         Settings.save(Settings.SNEAK_TOGGLED);
 
-//        MutableText sneakText = Text.translatable("marathon.text.sneak");
-//        MutableText statusText = Settings.SNEAK_TOGGLED.getValue() ? Text.translatable("marathon.text.toggled") : Text.translatable("marathon.text.untoggled");
-//
-//        PlayerUtils.sendMessage(sneakText.append(" ").append(statusText), true);
+        MutableComponent sneakText = Component.translatable("marathon.text.sneak");
+        MutableComponent statusText = Settings.SNEAK_TOGGLED.getValue() ? Component.translatable("marathon.text.toggled") : Component.translatable("marathon.text.untoggled");
+
+        PlayerUtils.sendOverlayMessage(sneakText.append(" ").append(statusText));
     }
 }
